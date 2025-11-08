@@ -8,6 +8,11 @@ export default function Textform(props) {
     let newText = text.toUpperCase();
     setText(newText);
   };
+  const handleloClick = () => {
+//     console.log("Uppercase was clicked");
+    let newText = text.toLowerCase();
+    setText(newText);
+  };
 
   const handleonchange = (event) => {
 //     console.log("On change");
@@ -15,6 +20,7 @@ export default function Textform(props) {
   };
 
   return (
+       <>
     <div>
       <h1>{props.heading}</h1>
       <div className="mb-3">
@@ -26,9 +32,21 @@ export default function Textform(props) {
           rows="8"
         ></textarea>
       </div>
-      <button className="btn btn-primary" onClick={handleupClick}>
+      <button className="btn btn-primary mx-3" onClick={handleupClick}>
         Convert to Uppercase
       </button>
+       <button className="btn btn-primary mx-3" onClick={handleloClick}>
+        Convert to lowercase
+      </button>
     </div>
+    <div className='container my-3'>
+       <h1>your text summary</h1>
+       <p>{text.split(" ").length} words and {text.length} characters</p>
+       <p>{0.008 * text.split(" ").length} Minutes read</p>
+       <h2>Preview</h2>
+       <p>{text}</p>
+    </div>
+    </>
   );
+  
 }
