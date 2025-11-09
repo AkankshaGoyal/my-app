@@ -18,7 +18,11 @@ export default function Textform(props) {
 //     console.log("On change");
     setText(event.target.value);
   };
-
+  const cleartext = (event) => {
+       let newText = "";
+      setText(newText);
+  };
+   
   return (
        <>
     <div>
@@ -37,6 +41,9 @@ export default function Textform(props) {
       </button>
        <button className="btn btn-primary mx-3" onClick={handleloClick}>
         Convert to lowercase
+      </button>
+       <button className="btn btn-primary mx-3" onClick={cleartext}>
+        cleartext
       </button>
     </div>
     <div className='container my-3'>
