@@ -22,7 +22,24 @@ export default function Textform(props) {
        let newText = "";
       setText(newText);
   };
-   
+  const extractEmail = (text)=>{
+    const emailRegex = /[\w.-]+@[\w.-]+\.\w+/g;
+    const matches = text.match(emailRegex);
+    if(matches){
+       return matches;
+    }
+    else{
+       return [];
+    }
+  }
+  const handleExtractEmail = () => {
+  const emails = extractEmail(text);
+  if (emails.length > 0) {
+    setText(emails.join(", "));  // convert array to string
+  } else {
+    setText("No email found");
+  }
+};
   return (
        <>
     <div>
@@ -44,6 +61,9 @@ export default function Textform(props) {
       </button>
        <button className="btn btn-primary mx-3" onClick={cleartext}>
         cleartext
+      </button>
+       <button className="btn btn-danger mx-3" onClick={handleExtractEmail}>
+        Extract Email
       </button>
     </div>
     <div className='container my-3'>
