@@ -22,6 +22,16 @@ export default function Textform(props) {
        let newText = "";
       setText(newText);
   };
+  const handleCopy = () => {
+    var text = document.getElementById("myBox");
+    text.select();
+    navigator.clipboard.writeText(text.value);
+  }
+const handleExtraSpaces = () => {
+  let cleanText = text.replace(/\s+/g, " ").trim();
+  let sentences = cleanText.split(/(?<=[.?!])\s+/);
+  setText(sentences.join("\n"));
+};
   const extractEmail = (text)=>{
     const emailRegex = /[\w.-]+@[\w.-]+\.\w+/g;
     const matches = text.match(emailRegex);
@@ -39,6 +49,7 @@ export default function Textform(props) {
   } else {
     setText("No email found");
   }
+
 };
   return (
        <>
@@ -65,6 +76,13 @@ export default function Textform(props) {
        <button className="btn btn-danger mx-3" onClick={handleExtractEmail}>
         Extract Email
       </button>
+       <button className="btn btn-primary mx-3" onClick={handleCopy}>
+        Copy Content
+      </button>
+       
+     <button className="btn btn-primary mx-3" onClick={handleExtraSpaces}>
+      Remove Extra Spaces
+    </button>
     </div>
     <div className='container my-3'>
        <h1>your text summary</h1>
@@ -72,6 +90,8 @@ export default function Textform(props) {
        <p>{0.008 * text.split(" ").length} Minutes read</p>
        <h2>Preview</h2>
        <p>{text}</p>
+       
+      
     </div>
     </>
   );
