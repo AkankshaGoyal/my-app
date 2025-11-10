@@ -28,9 +28,8 @@ export default function Textform(props) {
     navigator.clipboard.writeText(text.value);
   }
 const handleExtraSpaces = () => {
-  let cleanText = text.replace(/\s+/g, " ").trim();
-  let sentences = cleanText.split(/(?<=[.?!])\s+/);
-  setText(sentences.join("\n"));
+  let newText = text.split(/[ ]+/);
+  setText(newText.join(" "));
 };
   const extractEmail = (text)=>{
     const emailRegex = /[\w.-]+@[\w.-]+\.\w+/g;
@@ -73,7 +72,7 @@ const handleExtraSpaces = () => {
        <button className="btn btn-primary mx-3" onClick={cleartext}>
         cleartext
       </button>
-       <button className="btn btn-danger mx-3" onClick={handleExtractEmail}>
+       <button className="btn btn-primary mx-3" onClick={handleExtractEmail}>
         Extract Email
       </button>
        <button className="btn btn-primary mx-3" onClick={handleCopy}>
