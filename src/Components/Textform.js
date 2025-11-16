@@ -3,18 +3,29 @@ import React, { useState } from 'react';
 export default function Textform(props) {
   const [text, setText] = useState('Enter text here');
 
-  const handleUpClick = () => setText(text.toUpperCase());
-  const handleLoClick = () => setText(text.toLowerCase());
-  const handleOnChange = (e) => setText(e.target.value);
+  const handleUpClick = () => {
+    setText(text.toUpperCase())
+    props.showAlert("converted to uppercase!","success");
+  }
+  const handleLoClick = () => {
+    setText(text.toLowerCase())
+    props.showAlert("converted to lowercase!","success");
+
+  }
+  const handleOnChange = (e) => {
+    setText(e.target.value);
+  }
   const clearText = () => setText('');
 
   const handleCopy = () => {
     navigator.clipboard.writeText(text);
+    props.showAlert("copied the content","success");
   };
 
   const handleExtraSpaces = () => {
     let newText = text.split(/[ ]+/);
     setText(newText.join(' '));
+    props.showAlert("remove extra space","success");
   };
 
   const extractEmail = (text) => {
@@ -23,10 +34,13 @@ export default function Textform(props) {
     return matches ? matches : [];
   };
 
-  const handleExtractEmail = () => {
-    const emails = extractEmail(text);
-    setText(emails.length > 0 ? emails.join(', ') : 'No email found');
-  };
+ const handleExtractEmail = () => {
+  const emails = extractEmail(text);
+
+  setText(emails.length > 0 ? emails.join(', ') : 'No email found');
+
+};
+
 
   return (
     <>
